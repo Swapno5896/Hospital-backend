@@ -14,6 +14,9 @@ app.get("/", (req, res) => {
   res.send("Hello medical care!");
 });
 
+app.get("/a", (req, res) => {
+  res.send("Hello medical care!");
+});
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
