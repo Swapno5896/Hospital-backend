@@ -43,7 +43,7 @@ client.connect((err) => {
     // });
   });
 
-  // get some data
+  // get some data blog
 
   app.get("/getBlog", (req, res) => {
     blogCollection.find({}).toArray((err, document) => {
