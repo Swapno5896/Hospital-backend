@@ -32,20 +32,71 @@ client.connect((err) => {
   // articals
   const articalsCollection = client.db("medical-care").collection("articals");
   //  contact
-  const articalsCollection = client.db("medical-care").collection("contact");
+  const contactCollection = client.db("medical-care").collection("contact");
 
-  //   add some data
+
+
+  // post multiple blogs
   app.post("/addBlog", (req, res) => {
-    const file = req.body.myFile.name;
-    console.log(file);
-    // file.mv(`${__dirname}/doctors/${file.name}`, (err) => {
-    //   console.log(err);
-    // });
-    // // console.log(req.body.myFile);
-    // blogCollection.insertOne(fakeBlog).then((result) => {
-    //   console.log(result.insertedCount);
-    // });
+    const fakeBlog = req.body;
+    // console.log(fakeBlog);
+    articalsCollection.insertMany(fakeBlog).then((result) => {
+      console.log(result.insertedCount);
+    });
   });
+
+  //  get all blogs
+  app.get("/getBlog", (req, res) => {
+    articalsCollection.find({}).toArray((err, document) => {
+      res.send(document);
+    });
+  });
+
+  // get sepecefic blogby id
+
+  const ObjId = require('mongodb').ObjectID
+  app.get('/getBlog/:id', (req, res) => {
+    articalsCollection.find({ _id: ObjId(req.params.id) })
+      .toArray((err, doc) => {
+        res.send(doc)
+      })
+  })
+
+
+  // post appointment
+  app.post('/addAppointment', (req, res) => {
+    appointmentCollection.insertOne(req.body)
+      .then(res => console.log(res))
+  })
+
+  // post contact
+  app.post('/addContact', (req, res) => {
+    contactCollection.insertOne(req.body)
+      .then(resp => {
+
+        console.log(resp)
+      })
+  })
+
+
+
+
+
+
+
+  // under hear contain experiment
+  // //   add some data
+  // app.post("/addBlog", (req, res) => {
+  //   // const file = req.body.myFile.name;
+  //   console.log(file);
+  //   // file.mv(`${__dirname}/doctors/${file.name}`, (err) => {
+  //   //   console.log(err);
+  //   // });
+  //   // // console.log(req.body.myFile);
+  //   // blogCollection.insertOne(fakeBlog).then((result) => {
+  //   //   console.log(result.insertedCount);
+  //   // });
+  // });
 
   // get some data blog ksldf lsdkflk 
 
@@ -75,13 +126,13 @@ client.connect((err) => {
   //     .then((result) => console.log(result));
   // });
 
-  app.get("/blogs/:id", (req, res) => {
-    blogCollection
-      .find({ _id: ObjectId(req.params.id) })
-      .toArray((err, document) => {
-        res.send(document);
-      });
-  });
+  // app.get("/blogs/:id", (req, res) => {
+  //   blogCollection
+  //     .find({ _id: ObjectId(req.params.id) })
+  //     .toArray((err, document) => {
+  //       res.send(document);
+  //     });
+  // });
 
   // here we'll update our data
   app.patch("/update", (req, res) => {
