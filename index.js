@@ -27,8 +27,12 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
 });
 client.connect((err) => {
-  const blogCollection = client.db("servie-master").collection("blogs");
-  // perform actions on the collection object
+  // appointappointments
+  const appointmentCollection = client.db("medical-care").collection("appointments");
+  // articals
+  const articalsCollection = client.db("medical-care").collection("articals");
+  //  contact
+  const articalsCollection = client.db("medical-care").collection("contact");
 
   //   add some data
   app.post("/addBlog", (req, res) => {
