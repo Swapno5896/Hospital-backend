@@ -43,7 +43,7 @@ client.connect((err) => {
     // });
   });
 
-  // get some data blog
+  // get some data blog ksldf lsdkflk 
 
   app.get("/getBlog", (req, res) => {
     blogCollection.find({}).toArray((err, document) => {
