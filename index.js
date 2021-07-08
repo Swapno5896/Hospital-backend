@@ -40,7 +40,7 @@ client.connect((err) => {
   app.post("/addBlog", (req, res) => {
     const fakeBlog = req.body;
     // console.log(fakeBlog);
-    articalsCollection.insertMany(fakeBlog).then((result) => {
+    articalsCollection.insertOne(fakeBlog).then((result) => {
       console.log(result.insertedCount);
     });
   });
@@ -100,22 +100,22 @@ client.connect((err) => {
 
   // get some data blog ksldf lsdkflk 
 
-  app.get("/getBlog", (req, res) => {
-    blogCollection.find({}).toArray((err, document) => {
-      res.send(document);
-    });
-  });
+  // app.get("/getBlog", (req, res) => {
+  //   blogCollection.find({}).toArray((err, document) => {
+  //     res.send(document);
+  //   });
+  // });
 
   // delete
 
-  const ObjectId = require("mongodb").ObjectId;
+  // const ObjectId = require("mongodb").ObjectId;
 
-  app.delete("/deletBlog/:id", (req, res) => {
-    // console.log(req.params.id);
-    blogCollection
-      .deleteOne({ _id: ObjectId(req.params.id) })
-      .then((result) => console.log(result));
-  });
+  // app.delete("/deletBlog/:id", (req, res) => {
+  //   // console.log(req.params.id);
+  //   blogCollection
+  //     .deleteOne({ _id: ObjectId(req.params.id) })
+  //     .then((result) => console.log(result));
+  // });
 
   // const ObjectId = require("mongodb").ObjectId; age kora hyca tai akn kora lagbe na
 
