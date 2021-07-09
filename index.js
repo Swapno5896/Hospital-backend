@@ -36,14 +36,7 @@ client.connect((err) => {
 
 
 
-  // post multiple blogs
-  app.post("/addBlog", (req, res) => {
-    const fakeBlog = req.body;
-    // console.log(fakeBlog);
-    articalsCollection.insertOne(fakeBlog).then((result) => {
-      console.log(result.insertedCount);
-    });
-  });
+
 
   //  get all blogs
   app.get("/getBlog", (req, res) => {
@@ -52,8 +45,8 @@ client.connect((err) => {
     });
   });
 
-  // get sepecefic blogby id
 
+  // get sepecefic blogby id
   const ObjId = require('mongodb').ObjectID
   app.get('/getBlog/:id', (req, res) => {
     articalsCollection.find({ _id: ObjId(req.params.id) })
@@ -61,6 +54,15 @@ client.connect((err) => {
         res.send(doc)
       })
   })
+
+
+  // post single  blog
+  app.post("/addBlog", (req, res) => {
+
+    articalsCollection.insertOne(req.body).then((result) => {
+      console.log(result.insertedCount);
+    });
+  });
 
 
   // post appointment
